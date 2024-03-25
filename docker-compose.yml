@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+
+  postgresdb:
+    image: postgreslocal:1
+
+    networks:
+      vpc:
+        ipv4_address: 172.7.0.2
+
+  usermcs:
+    image: usermcs:1
+
+    networks:
+      vpc:
+        ipv4_address: 172.7.0.3
+
+
+networks:
+  vpc:
+    name: vpc
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.7.0.0/16
+          gateway: 172.7.0.1
+
+
